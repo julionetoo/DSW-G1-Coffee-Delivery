@@ -4,7 +4,8 @@ import { useTheme } from 'styled-components'
 import { CoffeeCard } from '../../components/CoffeeCard'
 
 import { CoffeeList, Heading, Hero, HeroContent, Info } from './styles'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { api } from '../../serves/api';
 
 interface Coffee {
   id: string;
@@ -19,9 +20,11 @@ interface Coffee {
 export function Home() {
   const theme = useTheme();
 
+  const [coffee, setCoffee] = useState<Coffee | []>([]);
+
   useEffect(() => {
-    // request para a API para pegar os cafés
-    // e setar no estado
+    const response = api.get('./coffee_bd.json')
+    setCoffee(response.data)
   }, []);
 
 
